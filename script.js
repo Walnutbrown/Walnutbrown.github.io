@@ -52,33 +52,4 @@ const spy = new IntersectionObserver((entries) => {
 }, { rootMargin: '-45% 0px -54% 0px' });
 document.querySelectorAll('#top, main section[id]').forEach((s) => spy.observe(s));
 
-// 5. 프로젝트 시안 비교: A 그리드 / B 스와이프
-// shortcut: 시안 비교용 토글이다. 하나로 정하면 토글 버튼과 안 쓰는 쪽 코드를 지운다
-const list = document.querySelector('.projects');
-const swipeNav = document.querySelector('.swipe-nav');
-const [prevBtn, nextBtn] = swipeNav.querySelectorAll('.swipe-btn');
-const countEl = swipeNav.querySelector('.swipe-count b');
-const step = () => list.firstElementChild.offsetWidth + parseFloat(getComputedStyle(list).columnGap);
-
-const updateSwipe = () => {
-  const atEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 2;
-  const index = atEnd ? list.children.length - 1 : Math.round(list.scrollLeft / step());
-  countEl.textContent = String(index + 1).padStart(2, '0');
-  prevBtn.disabled = list.scrollLeft <= 2;
-  nextBtn.disabled = atEnd;
-};
-list.addEventListener('scroll', updateSwipe, { passive: true });
-prevBtn.addEventListener('click', () => list.scrollBy({ left: -step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
-nextBtn.addEventListener('click', () => list.scrollBy({ left: step(), behavior: reduceMotion ? 'auto' : 'smooth' }));
-
-const layoutBtns = document.querySelectorAll('[data-layout]');
-layoutBtns.forEach((btn) => btn.addEventListener('click', () => {
-  const swipe = btn.dataset.layout === 'swipe';
-  list.classList.toggle('is-swipe', swipe);
-  swipeNav.hidden = !swipe;
-  layoutBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-  list.scrollLeft = 0;
-  updateSwipe();
-}));
-
 document.getElementById('year').textContent = new Date().getFullYear();

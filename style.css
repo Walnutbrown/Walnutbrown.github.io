@@ -34,7 +34,6 @@
 :root[data-theme="dark"]  { color-scheme: dark; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 96px; }
 
@@ -216,14 +215,7 @@ ul { list-style: none; }
 
 /* ===== 섹션 공통 ===== */
 .section { width: min(var(--max), 100% - 32px); margin: 0 auto; padding: 120px 0 20px; }
-.section-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 36px;
-}
+.section-head { margin-bottom: 36px; }
 .eyebrow {
   font-size: 13px;
   letter-spacing: 0.2em;
@@ -276,56 +268,6 @@ h2 {
 }
 .card-arrow { font-size: 18px; color: var(--muted); transition: transform 0.6s var(--ease), color 0.6s var(--ease); }
 .card:hover .card-arrow { transform: translate(3px, -3px); color: var(--fg); }
-
-/* 시안 비교 토글 (A 그리드 / B 스와이프) */
-.layout-switch {
-  display: inline-flex;
-  padding: 4px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--fill);
-}
-.layout-switch button {
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  color: var(--muted);
-  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
-}
-.layout-switch button[aria-pressed="true"] { background: var(--solid); color: var(--on-solid); }
-
-/* 시안 B: 가로로 넘기는 카드. 손가락/트랙패드로 밀면 한 장씩 멈춘다 */
-.projects.is-swipe {
-  grid-template-columns: none;
-  grid-auto-flow: column;
-  grid-auto-columns: min(82%, 440px);
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  /* hover 때 카드가 떠오를 공간 */
-  padding: 10px 0 24px;
-  margin: -10px 0 -24px;
-}
-.projects.is-swipe::-webkit-scrollbar { display: none; }
-.projects.is-swipe > .card { scroll-snap-align: start; }
-
-.swipe-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; }
-.swipe-count { font-size: 14px; color: var(--faint); font-variant-numeric: tabular-nums; }
-.swipe-count b { font-weight: 500; color: var(--fg); }
-.swipe-btns { display: flex; gap: 8px; }
-.swipe-btn {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: var(--fill);
-  transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease), opacity 0.4s var(--ease);
-}
-.swipe-btn:hover:not(:disabled) { background: var(--solid); border-color: var(--solid); color: var(--on-solid); }
-.swipe-btn:disabled { opacity: 0.35; cursor: default; }
 
 /* ===== 3. 스킬 ===== */
 .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
